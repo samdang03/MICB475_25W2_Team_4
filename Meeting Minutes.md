@@ -34,7 +34,7 @@ Gives u predictive functional profile on your groups
 Start uploading your metadata on the shared server
 MAKE SURE you email Hans before trimming data 
 
-#Feburary 12, 2026 Notes
+# Feburary 12, 2026 Notes
 
 
 
