@@ -4,7 +4,7 @@
 
 
 ## Feburary 19 
-#- Discuss whether it would be necessary to have both conductivity and cation exchange variables 
-#- Confirm research question 
-#- Discuss any questions on the proposal
+- Discuss whether it would be necessary to have both conductivity and cation exchange variables 
+- Confirm research question 
+- Discuss any questions on the proposal
 
