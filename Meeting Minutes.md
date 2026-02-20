@@ -45,4 +45,5 @@ MAKE SURE you email Hans before trimming data
 ## Extra notes: Proposal question should be drafted
 
 
-
+# Feburary 19, 2026 Notes
+- Title should not be a paper title yet.. should be more open for what you are planning to do on your proposal eg. Investigation... or Exploring...
