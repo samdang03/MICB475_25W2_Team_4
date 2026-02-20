@@ -36,6 +36,11 @@ MAKE SURE you email Hans before trimming data
 
 # Feburary 12, 2026 Notes
 
+1.) Further analysis to determine the exact "threshold" (step behavior) in conductivity (as compared to net mineralization) needed
+2.) Moving away from a high-throughput plot, focusing on two selected variables going forwards after ensuring consistency
+3.) Net immobilization may be due to high NH4 levels in general and may not be entirely linked to cable bacteria
+
+## Extra notes: Proposal question should be drafted
 
 
 
