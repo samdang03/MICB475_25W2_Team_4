@@ -58,3 +58,22 @@ cond_vs_n_mineralization
 ggsave("Conductivity vs Nitrogen Mineralization.png", cond_vs_n_mineralization, 
        width = 7, height = 7)
 
+meta_ion_scatter_data <- meta_wetlands %>%
+  select(conductivity,
+         sodium,
+         calcium,
+         potassium,
+         magnesium) %>%
+  mutate(across(everything(),
+                ~ suppressWarnings(as.numeric(.))))
+
+
+Ion_Scatter_Matrix <- ggpairs(
+  meta_ion_scatter_data,
+  title = "Electrolyte Ion Scatter Plot Matrix"
+)
+
+Ion_Scatter_Matrix
+ggsave("Electrolyte Ion scatter plot matrix.png", Ion_Scatter_Matrix, 
+       width = 7, height = 7)
+
