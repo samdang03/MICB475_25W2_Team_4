@@ -1,0 +1,3 @@
+  163  qiime taxa filter-table --i-table wetlands_table_final.qza --i-taxonomy wetlands_taxonomy.qza --p-exclude mitochondria,chloroplast --o-filtered-table wetlands_table_filtered.qza
+  165  qiime taxa filter-table --i-table wetlands_table_final.qza --i-taxonomy wetlands_taxonomy.qza --p-include Cyanobacteria --o-filtered-table wetlands_table_cyanobacteria_only.qza
+  370  history | grep "filter-table" > filtering_logic.txt
