@@ -6,10 +6,10 @@ library(ggplot2)
 library(GGally)
 library(psych)
 
-metafp <- "wetlands_metadata.txt"
-meta_wetlands <- read_delim(metafp, delim = "\t")
 meta_wetlands_categorical <- meta_wetlands %>%
-  filter(conductivity != "Missing: Not provided")%>%
+  mutate(across(where(~ is.character(.x) | is.factor(.x)),
+                ~ na_if(.x, "Missing: Not provided"))) %>%
+  mutate(conductivity = as.numeric(conductivity)) %>%
   mutate(conductivity_category = factor(
     if_else(conductivity >= 0.3, "high", "low"),
     levels = c("low", "high")))
