@@ -6,6 +6,9 @@ library(ggplot2)
 library(GGally)
 library(psych)
 
+metafp<-"wetlands_metadata.txt"
+meta_wetlands <- read_delim(metafp, delim = "\t")
+
 meta_wetlands_categorical <- meta_wetlands %>%
   mutate(across(where(~ is.character(.x) | is.factor(.x)),
                 ~ na_if(.x, "Missing: Not provided"))) %>%
