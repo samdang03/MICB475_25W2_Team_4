@@ -8,3 +8,7 @@
 - Confirm research question 
 - Discuss any questions on the proposal
 
+## March 05
+- Review proposal revisions
+- Discuss manuscript structure
+- Decide where to put the nitrogen section
