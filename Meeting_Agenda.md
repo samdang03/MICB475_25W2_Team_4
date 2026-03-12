@@ -12,3 +12,14 @@
 - Review proposal revisions
 - Discuss manuscript structure
 - Decide where to put the nitrogen section
+
+## March 12
+Discuss progress in data analysis in R and results section
+1) Diversity Analysis
+- Discuss progress in alpha( ) and beta( ) analysis in R
+2) Taxonomic Analysis
+- Discuss the new Relative Abundance Barplot made by Erica
+- Suggest potentially looking deeper at Family phylogentic level over Phylum as the cable bacteria are specifically under the Desulfobulbocae family
+3) Functional Analysis
+- QIIME2 pathway analysis output currently running in background
+- Discussion decision to use MeteCyc database for functional analysis as they provide pathway reccurence information and can help look into specific metabolic pathways of interest such as DNRA and Denitrification
