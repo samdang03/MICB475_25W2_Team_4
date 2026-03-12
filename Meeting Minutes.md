@@ -78,3 +78,20 @@ Have 3 days to make edits based on suggestions
 PLOT everything on R, including taxaonomic barplot 
 
 
+# March 12, 2026 notes
+
+## Diversity analysis: Currently run by Ruth and Rick, will probably be done by next week
+- Run in R 
+- Taxonomic analysis: Current run by Erica, files are in "results" on GitHub
+- Trim phyla down to top 10, others clustered as "other"
+- Possible further family runs under phylum on interest (Thermodesulfobacteriota) 
+## Functional (pathway) analysis: 
+- Medici 
+- K-O recommended to run
+- Looking for DNRA + Esox as the pathway of interest
+- DESEQ heatmap + barplot generation after PiCrust2
+## Cleaning Github
+- How to subfolder
+- .rm-r Folder, NOT rm folder password required. Add f after folder to force remove
+
+
