@@ -2,6 +2,7 @@ library(phyloseq)
 library(ape)
 library(tidyverse)
 library(picante)
+library(ggsignif)
 
 #### Load data ####
 metafp <- "Phyloseq_Files/wetlands_metadata_NEW 2.txt" 
@@ -90,6 +91,44 @@ plot.pd <- ggplot(sample_data(Phylo_rarefied), aes(conductivity_category, PD)) +
 # view plot
 plot.pd
 
-ggsave(filename = "plot_Faith's.png"
+ggsave(filename = "newplot_Faith's.png"
        , plot.pd
+       , height=4, width=6)
+
+##stats##
+
+#build dataframe combining alpha measures and metadata
+df <- data.frame(sample_data(Phylo_rarefied))
+df$sample <- sample_names(Phylo_rarefied)
+df$PD <- phylo_dist$PD[match(df$sample, rownames(phylo_dist))]
+
+#run wilcox.test
+wilcox.test(PD ~ conductivity_category, data = df)
+
+plot_nostats <- ggplot(df, aes(x = conductivity_category, y = PD)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, alpha = 0.6) +
+  xlab("Conductivity Category") +
+  ylab("Faith's Phylogenetic Diversity")
+plot_nostats
+
+plot_stats <-plot_stats <- ggplot(df, aes(x = conductivity_category, y = PD, fill = conductivity_category)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, alpha = 0.6) +
+  geom_signif(
+    comparisons = list(c("low", "high")),
+    y_position = max(df$PD, na.rm = TRUE) * 1.05,
+    annotations = c("**")
+  ) +
+  scale_fill_manual(values = c(
+    "low" = "#D55E00",
+    "high" = "#0072B2"
+  )) +
+  expand_limits(y = max(df$PD, na.rm = TRUE) * 1.15) +
+  xlab("Conductivity Category") +
+  ylab("Faith's Phylogenetic Diversity")
+plot_stats
+
+ggsave(filename = "plot_Faith's_withstats.png"
+       , plot_stats
        , height=4, width=6)
