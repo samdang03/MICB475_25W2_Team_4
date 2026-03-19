@@ -63,15 +63,8 @@ phylo <- phyloseq(OTU, SAMP, TAX, phylotree)
 phylo
 
 # Filter out samples with "Missing Data" in conductivity_category
-samples_to_keep <- sample_names(phylo)[get_variable(phylo, "conductivity_category") != "Missing Data"]
-phylo_final <- prune_samples(samples_to_keep, phylo)
-cat("Aim 1 subset contains:", nsamples(phylo_final), "samples.\n")
-phylo_final
 
-phylo_final <- subset_samples(
-  phylo,  !is.na(conductivity_category) & conductivity_category != "Missing Data")
-
-phylo_final <- prune_taxa(taxa_sums(phylo_final) > 0, phylo_final)
+phylo_final <- subset_samples(phylo, !is.na(conductivity_category))
 
 #Filter out Chloroplast and Mitochondria 
 phylo_final <- subset_taxa(phylo_final, Domain == "d__Bacteria" & Family!= "f__Chloroplast" & Family != "f__Mitochondria")
