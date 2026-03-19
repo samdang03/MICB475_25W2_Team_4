@@ -110,13 +110,12 @@ gg_pcoa_ellipse <- plot_ordination(phylo_rare, pcoa_wu,
            stat_ellipse(type = "norm") +              
       labs(color = "Conductivity Level", 
       shape = "Conductivity Level",
-      title = "Weighted UniFrac PCoA") +
-  theme_minimal()
+      title = "Weighted UniFrac PCoA")
 
 gg_pcoa_ellipse
 
 # Save the Plot 
-ggsave("wunifrac_pcoa.png"
+ggsave("wunifrac_PERMANOVA_pcoa.png"
        , gg_pcoa_ellipse
        , height=4, width=5)
 
