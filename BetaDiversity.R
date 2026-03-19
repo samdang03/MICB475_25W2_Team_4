@@ -3,6 +3,7 @@ library(ape)
 library(tidyverse)
 library(picante)
 library(ggplot2)
+library(vegan)
 
 #### Load data ####
 metafp <- "phylo_objects/wetlands_metadata_NEW.txt" 
@@ -70,7 +71,7 @@ phylo_final <- subset_samples(phylo, !is.na(conductivity_category))
 phylo_final <- subset_taxa(phylo_final, Domain == "d__Bacteria" & Family!= "f__Chloroplast" & Family != "f__Mitochondria")
 
 #Rarefy to the depth of your smallest sample
-# rarecurve(t(as.data.frame(otu_table(phylo_final))), cex=0.1)
+rarecurve(t(as.data.frame(otu_table(phylo_final))), cex=0.1)
 phylo_rare <- rarefy_even_depth(phylo_final, rngseed =123, replace = FALSE)
 
 #### Beta Diversity ####
@@ -93,7 +94,29 @@ ggsave("wunifrac_pcoa.png"
        , gg_pcoa
        , height=4, width=5)
 
+#### PERMANOVA analysis on Weighted Unifrac ####
+# Extract sampel data from phyloseq 
+samp_df <- data.frame(sample_data(phylo_rare))
 
+# Use phyloseq to calculate weighted Unifrac distance matrix
+adonis2(wu_dm ~ conductivity_category, data = samp_df)
 
+# re-plot the above PCoA with ellipses to show a significant difference 
+#between high and low conductiivty  using ggplot2
 
+gg_pcoa_ellipse <- plot_ordination(phylo_rare, pcoa_wu, 
+           color = "conductivity_category",
+          shape = "conductivity_category") +  
+           stat_ellipse(type = "norm") +              
+      labs(color = "Conductivity Level", 
+      shape = "Conductivity Level",
+      title = "Weighted UniFrac PCoA") +
+  theme_minimal()
+
+gg_pcoa_ellipse
+
+# Save the Plot 
+ggsave("wunifrac_pcoa.png"
+       , gg_pcoa_ellipse
+       , height=4, width=5)
 
