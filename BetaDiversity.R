@@ -70,7 +70,7 @@ phylo_final <- subset_samples(phylo, !is.na(conductivity_category))
 phylo_final <- subset_taxa(phylo_final, Domain == "d__Bacteria" & Family!= "f__Chloroplast" & Family != "f__Mitochondria")
 
 #Rarefy to the depth of your smallest sample
-rarecurve(t(as.data.frame(otu_table(phylo_final))), cex=0.1)
+# rarecurve(t(as.data.frame(otu_table(phylo_final))), cex=0.1)
 phylo_rare <- rarefy_even_depth(phylo_final, rngseed =123, replace = FALSE)
 
 #### Beta Diversity ####
