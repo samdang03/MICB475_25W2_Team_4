@@ -23,3 +23,13 @@ Discuss progress in data analysis in R and results section
 3) Functional Analysis
 - QIIME2 pathway analysis output currently running in background
 - Discussion decision to use MeteCyc database for functional analysis as they provide pathway reccurence information and can help look into specific metabolic pathways of interest such as DNRA and Denitrification
+
+## March 18 
+Discuss progress in data analysis in R 
+1) Diversity Analysis
+  - Discuss progress in alpha diversity
+  - Discuss progress in beta diversity
+2) Taxonomic Analysis
+  - Look at the edited relative abundance plot
+3) Functional Analysis
+  - Discuss progress 
