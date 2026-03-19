@@ -61,14 +61,15 @@ class(TAX)
 Phylo_object <- phyloseq(OTU, SAMP, TAX, phylotree)
 Phylo_object
 
+tax_table(Phylo_final)
 #Filter out NAs
-Phylo_filtered <- subset_samples(Phylo_final, !is.na(conductivity_category))
+Phylo_filtered <- subset_samples(Phylo_object, !is.na(conductivity_category))
 
 #Filter out Chloroplast and Mitochondria
-Phylo_final <- subset_taxa(Phylo_filtered, Family != "Chloroplast" & Order != "Mitochondria")
+Phylo_final <- subset_taxa(Phylo_filtered, Domain == "d__Bacteria" & Family != "f__Chloroplast" & Family != "f__Mitochondria")
 
 #Rarefaction
-rarecurve(t(as.data.frame(otu_table(Phylo_final))), cex=0.1)
+#rarecurve(t(as(otu_table(Phylo_final), "matrix")), cex=0.1)
 Phylo_rarefied <- rarefy_even_depth(Phylo_final, rngseed = 123, replace = FALSE) 
 
 # phylogenetic diversity
