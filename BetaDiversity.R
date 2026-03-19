@@ -104,13 +104,20 @@ adonis2(wu_dm ~ conductivity_category, data = samp_df)
 # re-plot the above PCoA with ellipses to show a significant difference 
 #between high and low conductiivty  using ggplot2
 
-gg_pcoa_ellipse <- plot_ordination(phylo_rare, pcoa_wu, 
-           color = "conductivity_category",
-          shape = "conductivity_category") +  
-           stat_ellipse(type = "norm") +              
-      labs(color = "Conductivity Level", 
-      shape = "Conductivity Level",
-      title = "Weighted UniFrac PCoA")
+gg_pcoa_ellipse <- plot_ordination(
+  phylo_rare, pcoa_wu,
+  color = "conductivity_category",
+  shape = "conductivity_category"
+) +
+  stat_ellipse(type = "norm") +
+  labs(
+    color = "Conductivity Level",
+    shape = "Conductivity Level",
+    title = "Weighted UniFrac PCoA",
+    x = paste0("Axis 1 (", round(pcoa_wu$values$Relative_eig[1]*100, 1), "%)"),
+    y = paste0("Axis 2 (", round(pcoa_wu$values$Relative_eig[2]*100, 1), "%)")
+  ) +
+  scale_color_manual(values = c("high" = "#0072B2", "low" = "#D55E00"))
 
 gg_pcoa_ellipse
 
