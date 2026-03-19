@@ -94,4 +94,20 @@ PLOT everything on R, including taxaonomic barplot
 - How to subfolder
 - .rm-r Folder, NOT rm folder password required. Add f after folder to force remove
 
+# March 19, 2026 notes
+##Further tasks
+- Functional analysis (Picrust) is being run by Hans now due to CPU issues
+- Not sure what's wrong, possibly data
+- Taxonomic analysis to Family level (Isolate desulfobacteriae family)
+## Beta + Alpha Diversity results
+- Alpha diversity: Heatmap gives significantly lower diversity in high conductivity levels
+- Beta diversity: p 0.045 on beta diversity, likely due to outliers
+## Graphing notes
+- Format should map general theme/colors chosen
+- Do not use default
+- Theme_classic() is good
+## Manuscript
+- Introduction written by Sam
+- Can start on rest of manuscript as needed
+
 
