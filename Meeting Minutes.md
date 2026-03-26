@@ -110,4 +110,55 @@ PLOT everything on R, including taxaonomic barplot
 - Introduction written by Sam
 - Can start on rest of manuscript as needed
 
+# March 26, 2026
+## Results discussion
+Alpha diversity: 
+- Multiple dots at same heights
+- Increased Faith's at low conductivity = high conductivity leads to reduced overall diversity, improved chances of desulfobacteria specifically
+- Remove figure legend
+Beta diversity (Weighted UniFrac): 
+- Not much difference
+- Unweighted is preferred for Faith's 
+- Low conductivity at top, high conductivity below (REVERSE THAT)
+- Prevalence = 0.5
+- Desulfobacteriae appears in 0.2? 
+- Abundance = 0.01
+- Normal values
+- No immediate interesting data. Possibly interesting to see what families specifically are seen in each
+- Ignore shared ones
+- Desulfobacteria not present? 
+- Placeholder for now, details need to be finagled
+Taxonomy analysis:
+- No need for rarefication, needs removal
+- Palettes need to be chosen differently (qualitative and distinct rather than quantitative)
+- Only desulfobulbaceae vs others 
+- % in phylum + within phylum of family stated rather than the % barplot
+- Plot average abundance of all samples instead of per sample? 
+- Box plot with relative abundance (Y%) 
+- Current barplot can be changed to supplemental figure (after fixing)
+- fix the y axis 
+- Wilcoxon analysis
+ISA: 
+- Phylum, Family, Genus, Indicator Value, P Value are main important statistics for the paper
+- Functional analysis: 
+- Waiting for response from someone who can actually run it :( 
+Manuscript
+- Phyla names used often - family in italics or not? Italics seems to be neat 
+Story
+- No major difference other than alpha diversity indicating lower diversity in high conductivity environments
+- Possibly due to something else, not likely desulfobacteriae given other data
+- They exist, difficult to say whether it contributes to conductivity 
+- ISA shows one comes up, but not sure if specific species 
+- Possible for conductivity high/low threshold being too high? 
+- Not much can be said about the correlation between conductivity and desulfobacteriae
+- Taxa barplot graphing only family/phylum of interest as a continuous variable compared to conductivity? Is there a relationship there? 
+- Spearman's test for p value (Continuous vs continuous)
+- Also gives rho number (positive or negative correlation) 
+- Will consider both linear and parabolic/other shape graphs
+- Line of best fit + ribbon 
+- x/sum x function
+- deseq also does conversion
+Slides
+- Possible looking at binned vs unbinned? Is it more meaningful to have one or both
+
 
