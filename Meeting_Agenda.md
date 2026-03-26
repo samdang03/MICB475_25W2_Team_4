@@ -33,3 +33,11 @@ Discuss progress in data analysis in R
   - Look at the edited relative abundance plot
 3) Functional Analysis
   - Discuss progress 
+
+## March 26
+Discuss final data analysis/results
+1) Taxonomnic analysis
+2) Functional analysis updates
+Slides and design
+1) General results discussion
+2) Narrative/focus for results and slides
