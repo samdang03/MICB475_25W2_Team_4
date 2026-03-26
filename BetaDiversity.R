@@ -117,7 +117,8 @@ gg_pcoa_ellipse <- plot_ordination(
     x = paste0("Axis 1 (", round(pcoa_wu$values$Relative_eig[1]*100, 1), "%)"),
     y = paste0("Axis 2 (", round(pcoa_wu$values$Relative_eig[2]*100, 1), "%)")
   ) +
-  scale_color_manual(values = c("high" = "#0072B2", "low" = "#D55E00"))
+  scale_color_manual(values = c("high" = "#0072B2", "low" = "#D55E00")) +
+  theme_classic()
 
 gg_pcoa_ellipse
 
