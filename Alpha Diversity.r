@@ -62,7 +62,6 @@ class(TAX)
 Phylo_object <- phyloseq(OTU, SAMP, TAX, phylotree)
 Phylo_object
 
-tax_table(Phylo_final)
 #Filter out NAs
 Phylo_filtered <- subset_samples(Phylo_object, !is.na(conductivity_category))
 
@@ -121,14 +120,17 @@ plot_stats <-plot_stats <- ggplot(df, aes(x = conductivity_category, y = PD, fil
     annotations = c("**")
   ) +
   scale_fill_manual(values = c(
-    "low" = "#D55E00",
+    "low" = "#D62728",
     "high" = "#0072B2"
   )) +
   expand_limits(y = max(df$PD, na.rm = TRUE) * 1.15) +
   xlab("Conductivity Category") +
-  ylab("Faith's Phylogenetic Diversity")
+  ylab("Faith's Phylogenetic Diversity") + 
+  theme_classic()
 plot_stats
 
 ggsave(filename = "plot_Faith's_withstats.png"
        , plot_stats
        , height=4, width=6)
+
+save(Phylo_final, file="Phylo_final.RData")
