@@ -71,8 +71,12 @@ phylo_final <- subset_samples(phylo, !is.na(conductivity_category))
 phylo_final <- subset_taxa(phylo_final, Domain == "d__Bacteria" & Family!= "f__Chloroplast" & Family != "f__Mitochondria")
 
 #Rarefy to the depth of your smallest sample
-rarecurve(t(as.data.frame(otu_table(phylo_final))), cex=0.1)
+#rarecurve(t(as.data.frame(otu_table(phylo_final))), cex=0.1)
 phylo_rare <- rarefy_even_depth(phylo_final, rngseed =123, replace = FALSE)
+
+# Save Phyloseq 
+save(phylo_final, file="phylo_final.RData")
+save(phylo_rare, file="phylo_rare.RData")
 
 #### Beta Diversity ####
 # Calculate weighted UniFrac distance
@@ -100,6 +104,7 @@ samp_df <- data.frame(sample_data(phylo_rare))
 
 # Use phyloseq to calculate weighted Unifrac distance matrix
 adonis2(wu_dm ~ conductivity_category, data = samp_df)
+
 
 # re-plot the above PCoA with ellipses to show a significant difference 
 #between high and low conductiivty  using ggplot2
