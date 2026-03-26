@@ -116,6 +116,7 @@ Alpha diversity:
 - Multiple dots at same heights
 - Increased Faith's at low conductivity = high conductivity leads to reduced overall diversity, improved chances of desulfobacteria specifically
 - Remove figure legend
+
 Beta diversity (Weighted UniFrac): 
 - Not much difference
 - Unweighted is preferred for Faith's 
@@ -128,6 +129,7 @@ Beta diversity (Weighted UniFrac):
 - Ignore shared ones
 - Desulfobacteria not present? 
 - Placeholder for now, details need to be finagled
+
 Taxonomy analysis:
 - No need for rarefication, needs removal
 - Palettes need to be chosen differently (qualitative and distinct rather than quantitative)
@@ -138,12 +140,15 @@ Taxonomy analysis:
 - Current barplot can be changed to supplemental figure (after fixing)
 - fix the y axis 
 - Wilcoxon analysis
+
 ISA: 
 - Phylum, Family, Genus, Indicator Value, P Value are main important statistics for the paper
 - Functional analysis: 
 - Waiting for response from someone who can actually run it :( 
+
 Manuscript
 - Phyla names used often - family in italics or not? Italics seems to be neat 
+
 Story
 - No major difference other than alpha diversity indicating lower diversity in high conductivity environments
 - Possibly due to something else, not likely desulfobacteriae given other data
@@ -158,6 +163,7 @@ Story
 - Line of best fit + ribbon 
 - x/sum x function
 - deseq also does conversion
+
 Slides
 - Possible looking at binned vs unbinned? Is it more meaningful to have one or both
 
