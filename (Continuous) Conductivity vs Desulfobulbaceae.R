@@ -74,7 +74,7 @@ final_df <- data.frame(
 
 # Extract Metadata
 meta_rel <- data.frame(sample_data(phylo_nmnc))
-meta$Sample <- rownames(meta_rel)
+meta_rel$Sample <- rownames(meta_rel)
 
 # Merge Columns from Metadata and OTU
 final_df <- dplyr::left_join(meta_rel, final_df, by = "Sample")
@@ -82,13 +82,13 @@ final_df <- dplyr::left_join(meta_rel, final_df, by = "Sample")
 # Replace no Desulfobulbacaea with 0
 final_df$Abundance[is.na(final_df$Abundance)] <- 0
 
-ggplot(final_df, aes(x = conductivity, y = Abundance)) +
+ggplot(final_df, aes(x =conductivity, y = Abundance)) +
   geom_point(alpha = 0.5, color = "steelblue") +
   geom_smooth(method = "lm", color = "red", se = TRUE) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
   labs(x = "Conductivity", y = "Relative Abundance of Desulfobulbaceae",
     title = "Conductivity vs Desulfobulbaceae Relative Abundance") +
-  theme_classic
+  theme_classic()
 
 ggsave("Continuous Conductivity vs Desulfobulbaceae.png",
        width = 8, height = 6, dpi = 300)
