@@ -47,30 +47,25 @@ phylo
 #Removing no conductivity data samples
 phylo_filtered <- subset_samples(phylo, !is.na(conductivity_category))
 
-#Removing chloroplasts and eukaryotes
-phylo_nmnc <- subset_taxa(phylo_filtered, Domain == "d__Bacteria" & Family != "f__Chloroplast" & Family != "f__Mitochondria")
+#Subset only Thermosulfobacteriota phylum
+phylo_nmnc <- subset_taxa(phylo_filtered, Phylum == "p__Thermodesulfobacteriota")
 
 phylo_notree <- phyloseq(
   otu_table(phylo_nmnc),
   tax_table(phylo_nmnc),
   sample_data(phylo_nmnc))
 
-#Convert to relative abundance
-phy_rel <- transform_sample_counts(phylo_nmnc, function(x) x / sum(x))
+# Convert to relative abundance
+phy_rel <- transform_sample_counts(phylo_notree, function(x) x / sum(x))
 
-otu_rel <- as.data.frame(otu_table(phy_rel))
-tax_rel <- as.data.frame(tax_table(phy_rel))
+# Aggregate at Genus level
+phy_genus <- tax_glom(phy_rel, taxrank = "Genus")
 
-target_genus <- "g__Candidatus_Electronema"
-
-target_row <- rownames(tax_rel)[tax_rel$Genus == target_genus]
-
-# Extract Abundance
-abund_vec <- colSums(otu_rel[target_row, , drop = FALSE])
-
-final_df <- data.frame(
-  Sample = names(abund_vec),
-  Abundance = as.numeric(abund_vec))
+# Filter for Candidatus Electronema
+df_target <- df_genus %>%
+  filter(Genus == "g__Candidatus_Electronema") %>%
+  group_by(Sample) %>%
+  summarise(Abundance = sum(Abundance), .groups = "drop")
 
 # Extract Metadata
 meta_rel <- data.frame(sample_data(phylo_nmnc))

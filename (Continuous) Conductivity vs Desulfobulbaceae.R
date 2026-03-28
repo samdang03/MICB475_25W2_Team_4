@@ -55,22 +55,17 @@ phylo_notree <- phyloseq(
   tax_table(phylo_nmnc),
   sample_data(phylo_nmnc))
 
-#Convert to relative abundance
-phy_rel <- transform_sample_counts(phylo_nmnc, function(x) x / sum(x))
 
-otu_rel <- as.data.frame(otu_table(phy_rel))
-tax_rel <- as.data.frame(tax_table(phy_rel))
+phy_rel <- transform_sample_counts(phylo_notree, function(x) x / sum(x))
 
-target_family <- "f__Desulfobulbaceae"
+# Aggregate at Family level
+phy_family <- tax_glom(phy_rel, taxrank = "Family")
 
-target_row <- rownames(tax_rel)[tax_rel$Family == target_family]
-
-# Extract Abundance
-abund_vec <- colSums(otu_rel[target_row, , drop = FALSE])
-
-final_df <- data.frame(
-  Sample = names(abund_vec),
-  Abundance = as.numeric(abund_vec))
+# Filter for Desulfobulbaceae
+df_target <- df_family %>%
+  filter(Family == "f__Desulfobulbaceae") %>%
+  group_by(Sample) %>%
+  summarise(Abundance = sum(Abundance), .groups = "drop")
 
 # Extract Metadata
 meta_rel <- data.frame(sample_data(phylo_nmnc))
