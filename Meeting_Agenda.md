@@ -47,6 +47,7 @@ Go over current rough presentation slides and updated/new figures
 1) Taxonomic analysis
 2) Updated plots for alpha/beta diversity
 3) Updated plots for ISA/coremicrobiome 
+
 General considerations:
 - Discuss what changes may be needed to strengthen story
 - Discuss how to finalize slides to be presentation-ready
