@@ -25,7 +25,7 @@ taxtable <- tax_table(phylo_filtered) %>% as.data.frame() %>% rownames_to_column
 ISA_table <- isa_multipatt$sign %>%
   rownames_to_column(var="ASV") %>%
   left_join(taxtable) %>%
-  filter(p.value<0.05) %>% View()
+  filter(p.value<0.05, stat > 0.7) %>% View()
 
 
 
