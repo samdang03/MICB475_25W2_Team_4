@@ -79,38 +79,38 @@ save(phylo_rare, file="phylo_rare.RData")
 
 
 #### Beta Diversity ####
-# Calculate weighted UniFrac distance
-wu_dm <- distance(phylo_rare, method = "wunifrac")
+# Calculate Unweighted UniFrac distance
+uw_dm <- distance(phylo_rare, method = "unifrac")
 
 # Perform PCoA ordination
-pcoa_wu <- ordinate(phylo_rare, method = "PCoA", distance = wu_dm)
+pcoa_uw <- ordinate(phylo_rare, method = "PCoA", distance = uw_dm)
 
 # Plot ordination
 
-gg_pcoa <- plot_ordination(phylo_final, pcoa_wu, color = "conductivity_category", shape = "conductivity_category") +
+gg_pcoa <- plot_ordination(phylo_final, pcoa_uw, color = "conductivity_category", shape = "conductivity_category") +
   labs(col = "Conductivity Level",shape = "Conductivity Level")
 
 # Display the plot
 gg_pcoa
 
 #Save the Plot 
-ggsave("wunifrac_pcoa.png"
+ggsave("uwunifrac_pcoa.png"
        , gg_pcoa
        , height=4, width=5)
 
-#### PERMANOVA analysis on Weighted Unifrac ####
+#### PERMANOVA analysis on Unweighted Unifrac ####
 # Extract sampel data from phyloseq 
 samp_df <- data.frame(sample_data(phylo_rare))
 
 # Use phyloseq to calculate weighted Unifrac distance matrix
-adonis2(wu_dm ~ conductivity_category, data = samp_df)
+adonis2(uw_dm ~ conductivity_category, data = samp_df)
 
 
 # re-plot the above PCoA with ellipses to show a significant difference 
 #between high and low conductiivty  using ggplot2
 
 gg_pcoa_ellipse <- plot_ordination(
-  phylo_rare, pcoa_wu,
+  phylo_rare, pcoa_uw,
   color = "conductivity_category",
   shape = "conductivity_category"
 ) +
@@ -118,8 +118,8 @@ gg_pcoa_ellipse <- plot_ordination(
   labs(
     color = "Conductivity Level",
     shape = "Conductivity Level",
-    x = paste0("Axis 1 (", round(pcoa_wu$values$Relative_eig[1]*100, 1), "%)"),
-    y = paste0("Axis 2 (", round(pcoa_wu$values$Relative_eig[2]*100, 1), "%)")
+    x = paste0("Axis 1 (", round(pcoa_uw$values$Relative_eig[1]*100, 1), "%)"),
+    y = paste0("Axis 2 (", round(pcoa_uw$values$Relative_eig[2]*100, 1), "%)")
   ) +
   scale_color_manual(values = c("high" = "#0072B2", "low" = "#D62728")) +
   theme_classic()
@@ -127,7 +127,7 @@ gg_pcoa_ellipse <- plot_ordination(
 gg_pcoa_ellipse
 
 # Save the Plot 
-ggsave("wunifrac_PERMANOVA_pcoa.png"
+ggsave("uwunifrac_PERMANOVA_pcoa.png"
        , gg_pcoa_ellipse
        , height=4, width=5)
 
