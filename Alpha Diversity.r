@@ -111,7 +111,7 @@ plot_nostats <- ggplot(df, aes(x = conductivity_category, y = PD)) +
   ylab("Faith's Phylogenetic Diversity")
 plot_nostats
 
-plot_stats <-plot_stats <- ggplot(df, aes(x = conductivity_category, y = PD, fill = conductivity_category)) +
+plot_stats <- ggplot(df, aes(x = conductivity_category, y = PD, fill = conductivity_category)) +
   geom_boxplot() +
   geom_jitter(width = 0.2, alpha = 0.6) +
   geom_signif(
@@ -126,11 +126,14 @@ plot_stats <-plot_stats <- ggplot(df, aes(x = conductivity_category, y = PD, fil
   expand_limits(y = max(df$PD, na.rm = TRUE) * 1.15) +
   xlab("Conductivity Category") +
   ylab("Faith's Phylogenetic Diversity") + 
-  theme_classic()
+  theme_classic() + 
+  theme(legend.position = "none")
 plot_stats
 
-ggsave(filename = "plot_Faith's_withstats.png"
+ggsave(filename = "plot_Faith's_with_stats.png"
        , plot_stats
        , height=4, width=6)
 
 save(Phylo_final, file="Phylo_final.RData")
+
+
