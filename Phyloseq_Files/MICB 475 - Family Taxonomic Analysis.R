@@ -82,5 +82,6 @@ phy_plot <- plot_bar(phylo_desulfo_rarefied, fill = "Family") +
     x = "Individual Samples",
     y = "Relative Abundance (%)",
     caption = "Non-bacterial taxa filtered.")
+
 phy_plot
 
