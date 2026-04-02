@@ -41,3 +41,14 @@ Discuss final data analysis/results
 Slides and design
 1) General results discussion
 2) Narrative/focus for results and slides
+
+## April 2
+Go over current rough presentation slides and updated/new figures 
+1.) Taxonomic analysis 
+2.) Updated plots for alpha/beta diversity
+3.) Updated plots for ISA/coremicrobiome 
+General considerations:
+- Discuss what changes may be needed to strengthen story
+- Discuss how to finalize slides to be presentation-ready
+- Discuss how to prepare for presentation
+
