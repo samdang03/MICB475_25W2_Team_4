@@ -171,62 +171,62 @@ Slides
 ## Presentation Slides 
 
 ### Introduction 
-Slide 4: Start off by introducing soil micoribota, then go into WHY electron transport is IMPORTANT… 
-Add “there’s DECREASED oxidative reduction” processes in the soil so increased dependence of anaerobic reduction
-Emphasize that there’s LESS electron availability DEEPER down in the soil so we can emphasize the importance of electron transport
-Slide 5: More description for the FIGURE TEXT wise
-Make sure to remove, in author et. al
-NO FIGURE CAPTIONS!!!
-Don’t explain more than ONE concept per slide 
+- Slide 4: Start off by introducing soil micoribota, then go into WHY electron transport is IMPORTANT… 
+- Add “there’s DECREASED oxidative reduction” processes in the soil so increased dependence of anaerobic reduction
+- Emphasize that there’s LESS electron availability DEEPER down in the soil so we can emphasize the importance of electron transport
+- Slide 5: More description for the FIGURE TEXT wise
+- Make sure to remove, in author et. al
+- NO FIGURE CAPTIONS!!!
+- Hans advice: Don’t explain more than ONE concept per slide 
 Slide 7: 
-Ensure to “add in” for WETLANDS in hypothesis
-Say “MORE wll studied in freshwater sediments” 
+- Ensure to “add in” for WETLANDS in hypothesis
+- Say “MORE wll studied in freshwater sediments” 
 
 ### Results:
-Slide 11: “No significant difference in Desulfobulbaceae family abundance between conductivity categories” should be the TITLE
-Add DIVERSITY metrics FIRST, BEFORE taxonomic analysis 
-For alpha, directly say “HIGH conductivity” has LOWER faith’s diversity as title
-Explain the reasoning for how we bin the high vs low (the threshold values) 
-Combine Alpha with Beta diversity results and combine the titles
-Mention how conductivity epxlains 5% of the data at BEST, which is very little 
-ONLY use the LIST of family names BESIDES the venn diagram, REMOVE the donuts
-Get rid of the SHARED info 
-We see the “methyl” family in BOTH high and low conductivity groups sinc ewe’re LOOKING at a LOWER taxonomic LEVEL 
-Looking at the BIG picture it seems to change, but DOES it change when it comes to the specific family/species level 
-For ISA analysis, put the low and HIGH conductiviteis together
-COLORCODE them so that the HIGH is one color and LOW is another
-On slide 13, recheck the figure… why is ther eso many points?
+- Slide 11: “No significant difference in Desulfobulbaceae family abundance between conductivity categories” should be the TITLE
+- Add DIVERSITY metrics FIRST, BEFORE taxonomic analysis 
+- For alpha, directly say “HIGH conductivity” has LOWER faith’s diversity as title
+- Explain the reasoning for how we bin the high vs low (the threshold values) 
+- Combine Alpha with Beta diversity results and combine the titles
+- Mention how conductivity epxlains 5% of the data at BEST, which is very little 
+- ONLY use the LIST of family names BESIDES the venn diagram, REMOVE the donuts
+- Get rid of the SHARED info 
+- We see the “methyl” family in BOTH high and low conductivity groups sinc ewe’re LOOKING at a LOWER taxonomic LEVEL 
+- Looking at the BIG picture it seems to change, but DOES it change when it comes to the specific family/species level 
+- For ISA analysis, put the low and HIGH conductiviteis together
+- COLORCODE them so that the HIGH is one color and LOW is another
+- On slide 13, recheck the figure… why are there so many points?
 
 ### Order of figures
-Do alpha/beta DIVERSITY metrics FIRST
-Then go to desulfobaubalcae taxonomic graph and show it’s NOT signfiaccnt
-Do indicator species, though which we found the family of interest (Geobacterioceae)
-Even though it’s at LOW conductivity, which contradicts what we hypohteiszse… but it’s ok since we can still discuss it 
-Now look more specifically at Geobacterioceae in taxonomic analysis  
-Core microbiome can be in the supplemental 
+- Do alpha/beta DIVERSITY metrics FIRST
+- Then go to desulfobaubalcae taxonomic graph and show it’s NOT signfiaccnt
+- Do indicator species, though which we found the family of interest (Geobacterioceae)
+- Even though it’s at LOW conductivity, which contradicts what we hypohteiszse… but it’s ok since we can still discuss it 
+- Now look more specifically at Geobacterioceae in taxonomic analysis  
+- Core microbiome can be in the supplemental 
 
 ## MANUSCRIPT notes:
 
 ### Figure 1: Alpha as panel 1a, beta as panel 1b 
-At the diversity level, the binning DOES result in differences 
-LOW conductivity group has HIGHER diveristy
+- At the diversity level, the binning DOES result in differences 
+- LOW conductivity group has HIGHER diveristy
 
 ### Figure 2: Core microbiome 
-Put list of microbes, since it has the Geobacterioceae which appears as a UNIQUE species for the LOW conductivity group
+- Put list of microbes, since it has the Geobacterioceae which appears as a UNIQUE species for the LOW conductivity group
 
 ### Table 1: ISA 
 
 ### Figure 3: Taxonomic/Unbinned
-Panel a: BOX plot for desulfulbabaeae 
-Panel b: Continuous correlation plot for the UNBINNED version for desulfulbabaeae
-Panel c: Boxplot of relative abundance for Geobacterioceae
-Panel d: Continuous correlation plot for the UNBINNED version for desulfulbabaeae 
+- Panel a: BOX plot for desulfulbabaeae 
+- Panel b: Continuous correlation plot for the UNBINNED version for desulfulbabaeae
+- Panel c: Boxplot of relative abundance for Geobacterioceae
+- Panel d: Continuous correlation plot for the UNBINNED version for desulfulbabaeae 
 
 ### 1 supplemental figure 1
-Panel A: Taxa barplot for Desulfulbabaeae 
-Panel B: Taxa barplot Geobacterioceae
+- Panel A: Taxa barplot for Desulfulbabaeae 
+- Panel B: Taxa barplot Geobacterioceae
 
 ## TO DO:
-Chance to resubmit presentation if needed
-Meet TUESDAY 3:30pm at LSI to finalize graph since team 5 is presenting OUR group on THURSDAY
+- Chance to resubmit presentation if needed
+-Meet TUESDAY 3:30pm at LSI to finalize graph since team 5 is presenting OUR group on THURSDAY
 
