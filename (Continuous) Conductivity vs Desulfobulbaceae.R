@@ -56,34 +56,48 @@ phylo_notree <- phyloseq(
   sample_data(phylo_nmnc))
 
 
+# Convert to relative abundance (no tree for speed)
 phy_rel <- transform_sample_counts(phylo_notree, function(x) x / sum(x))
 
-# Aggregate at Family level
-phy_family <- tax_glom(phy_rel, taxrank = "Family")
+# Extract OTU + taxonomy
+otu_rel <- as.data.frame(otu_table(phy_rel))
+tax_rel <- as.data.frame(tax_table(phy_rel))
 
-# Filter for Desulfobulbaceae
-df_target <- df_family %>%
-  filter(Family == "f__Desulfobulbaceae") %>%
-  group_by(Sample) %>%
-  summarise(Abundance = sum(Abundance), .groups = "drop")
+# Ensure correct orientation
+if(!taxa_are_rows(phy_rel)){
+  otu_rel <- t(otu_rel)
+}
 
-# Extract Metadata
+# Identify Desulfobulbaceae
+target_row <- rownames(tax_rel)[grepl("Desulfobulbaceae", tax_rel$Family)]
+
+# Sum across all matching taxa
+abund_vec <- colSums(otu_rel[target_row, , drop = FALSE])
+
+# Build abundance dataframe
+abund_df <- data.frame(
+  Sample = names(abund_vec),
+  Abundance = as.numeric(abund_vec)
+)
+
+# Extract metadata
 meta_rel <- data.frame(sample_data(phylo_nmnc))
 meta_rel$Sample <- rownames(meta_rel)
 
-# Merge Columns from Metadata and OTU
-final_df <- dplyr::left_join(meta_rel, final_df, by = "Sample")
+# Merge
+final_df <- dplyr::left_join(meta_rel, abund_df, by = "Sample")
 
-# Replace no Desulfobulbacaea with 0
+# Replace missing with 0
 final_df$Abundance[is.na(final_df$Abundance)] <- 0
 
 ggplot(final_df, aes(x =conductivity, y = Abundance)) +
   geom_point(alpha = 0.5, color = "steelblue") +
   geom_smooth(method = "lm", color = "red", se = TRUE) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
-  labs(x = "Conductivity", y = "Relative Abundance of Desulfobulbaceae",
+  labs(x = "Conductivity (mS/cm)", y = "Relative Abundance of Desulfobulbaceae",
     title = "Conductivity vs Desulfobulbaceae Relative Abundance") +
   theme_classic()
+
 
 ggsave("Continuous Conductivity vs Desulfobulbaceae.png",
        width = 8, height = 6, dpi = 300)

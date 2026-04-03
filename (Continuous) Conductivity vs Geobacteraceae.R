@@ -47,43 +47,55 @@ phylo
 #Removing no conductivity data samples
 phylo_filtered <- subset_samples(phylo, !is.na(conductivity_category))
 
-#Subset only Thermosulfobacteriota phylum
-phylo_nmnc <- subset_taxa(phylo_filtered, Phylum == "p__Thermodesulfobacteriota")
+#Removing chloroplasts and eukaryotes
+phylo_nmnc <- subset_taxa(phylo_filtered, Domain == "d__Bacteria" & Family != "f__Chloroplast" & Family != "f__Mitochondria")
 
 phylo_notree <- phyloseq(
   otu_table(phylo_nmnc),
   tax_table(phylo_nmnc),
   sample_data(phylo_nmnc))
 
-# Convert to relative abundance
+
+# Convert to relative abundance (no tree for speed)
 phy_rel <- transform_sample_counts(phylo_notree, function(x) x / sum(x))
 
-# Aggregate at Genus level
-phy_genus <- tax_glom(phy_rel, taxrank = "Genus")
+# Extract OTU + Taxonomy
+otu_rel <- as.data.frame(otu_table(phy_rel))
+tax_rel <- as.data.frame(tax_table(phy_rel))
 
-# Filter for Candidatus Electronema
-df_target <- df_genus %>%
-  filter(Genus == "g__Candidatus_Electronema") %>%
-  group_by(Sample) %>%
-  summarise(Abundance = sum(Abundance), .groups = "drop")
+# Ensure correct orientation
+if(!taxa_are_rows(phy_rel))
+  {otu_rel <- t(otu_rel)}
 
-# Extract Metadata
+# Identify Geobacteraceae
+target_row <- rownames(tax_rel)[grepl("Geobacteraceae", tax_rel$Family)]
+
+# Sum across all matching taxa
+abund_vec <- colSums(otu_rel[target_row, , drop = FALSE])
+
+# Build abundance dataframe
+abund_df <- data.frame(
+  Sample = names(abund_vec),
+  Abundance = as.numeric(abund_vec))
+
+# Extract metadata
 meta_rel <- data.frame(sample_data(phylo_nmnc))
 meta_rel$Sample <- rownames(meta_rel)
 
-# Merge Columns from Metadata and OTU
-final_df <- dplyr::left_join(meta_rel, final_df, by = "Sample")
+# Merge
+final_df <- dplyr::left_join(meta_rel, abund_df, by = "Sample")
 
-# Replace no Candidatus Electronema with 0
+# Replace missing with 0
 final_df$Abundance[is.na(final_df$Abundance)] <- 0
 
-ggplot(final_df, aes(x = conductivity, y = Abundance)) +
+ggplot(final_df, aes(x =conductivity, y = Abundance)) +
   geom_point(alpha = 0.5, color = "steelblue") +
   geom_smooth(method = "lm", color = "red", se = TRUE) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 0.00001)) +
-  labs(x = "Conductivity", y = "Relative Abundance of Candidatus Electronema",
-    title = "Conductivity vs Candidatus Electronema Relative Abundance") +
-  theme_classic ()
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
+  labs(x = "Conductivity (mS/cm)", y = "Relative Abundance of Geobacteraceae",
+    title = "Conductivity vs Geobacteraceae Relative Abundance") +
+  theme_classic()
 
-ggsave("Continuous Conductivity vs Candidatus Electronema.png",
+
+ggsave("Continuous Conductivity vs Geobacteraceae.png",
        width = 8, height = 6, dpi = 300)
