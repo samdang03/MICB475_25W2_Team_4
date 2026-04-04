@@ -77,64 +77,47 @@ top10_names
 
 tax_table(phylo_desulfo_family)[!taxa_names(phylo_desulfo_family) %in% top_10, "Family"] <- "Other"
 
+#There was some interesting correlation with Geobacter, so here are new graphs focusing on those
+#Geobacter abundance plot
+
+phylo_desulfo_family <- tax_glom(phylo_desulfo, taxrank = "Family")
+
+geo_only <- names(sort(taxa_sums(phylo_desulfo_family), TRUE)[1])
+geo_only
+
+tax_table(phylo_desulfo_family)[!taxa_names(phylo_desulfo_family) %in% geo_only, "Family"] <- "Other"
+
 #Relative abundance
-phylo_desulfo_relative <- transform_sample_counts(phylo_desulfo_family, function(x) x / sum(x))
+phylo_geo_relative <- transform_sample_counts(phylo_desulfo_family, function(x) x / sum(x))
 
 #Plot creation
-phylo_plot_1 <- plot_bar(phylo_desulfo_relative, fill = "Family") +
+phylo_plot_3 <- plot_bar(phylo_geo_relative, fill = "Family") +
   facet_wrap(~conductivity_category, scales = "free_x") +
   theme_classic() +
   geom_bar(aes(fill = Family), stat = "identity", position = "stack", color = NA) +
-  labs(title = "Relative Abundance of Families in Thermodesulfobacteriaceae Phylum",
+  labs(title = "Relative Abundance of Desulfobulbaceae Family in Thermodesulfobacteriaceae Phylum",
        subtitle = "Grouped by Sediment Conductivity Category",
        x = "Individual Samples",
        y = "Relative Abundance (%)") +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) 
-phylo_plot_1
 
-ggsave("results/taxonomy_family_plot.png", plot = phylo_plot_1, width = 10, height = 5, dpi = 300)
+phylo_plot_3
 
-
-#Filtering taxonomy table to desulfosbulbaceae + other
-phylo_desulfo_family <- tax_glom(phylo_desulfo, taxrank = "Family")
-
-desulfo_only <- names(sort(taxa_sums(phylo_desulfo_family), TRUE)[9])
-desulfo_only
-
-tax_table(phylo_desulfo_family)[!taxa_names(phylo_desulfo_family) %in% desulfo_only, "Family"] <- "Other"
-
-#Relative abundance
-phylo_desulfo_relative <- transform_sample_counts(phylo_desulfo_family, function(x) x / sum(x))
-
-#Plot creation
-phylo_plot_2 <- plot_bar(phylo_desulfo_relative, fill = "Family") +
-  facet_wrap(~conductivity_category, scales = "free_x") +
-  theme_classic() +
-  geom_bar(aes(fill = Family), stat = "identity", position = "stack", color = NA) +
-  labs(title = "Relative Abundance of Desulfobulbaceae Family in Thermodesulfobacteriaceae Phylum",
-    subtitle = "Grouped by Sediment Conductivity Category",
-    x = "Individual Samples",
-    y = "Relative Abundance (%)") +
-  theme(axis.text.x = element_blank(),
-         axis.ticks.x = element_blank()) 
-
-phylo_plot_2
-
-ggsave("results/taxonomy_desulfobulbaceae_relative_plot.png", plot = phylo_plot_2, width = 10, height = 5, dpi = 300)
+ggsave("results/taxonomy_geobacter_relative_plot.png", plot = phylo_plot_3, width = 10, height = 5, dpi = 300)
 
 #Conversion to relative abundance by sample for Wilcoxon box plot
-desulfo_df <- phylo_desulfo_relative %>%
+geo_df <- phylo_geo_relative %>%
   psmelt()
 
-desulfo_df <- mutate(desulfo_df, Abundance_num = as.numeric(Abundance))
+geo_df <- mutate(geo_df, Abundance_num = as.numeric(Abundance))
 
-desulfo_df <- desulfo_df %>%
+geo_df <- geo_df %>%
   group_by(Sample, conductivity_category) %>%
   summarize(Rel_Abun = mean(Abundance_num))
 
 #Wilcoxon box plot
-desulfo_wilcox_plot <- ggplot(desulfo_df, aes(x=conductivity_category, y=Rel_Abun, fill=conductivity_category)) + 
+geo_wilcox_plot <- ggplot(geo_df, aes(x=conductivity_category, y=Rel_Abun, fill=conductivity_category)) + 
   geom_boxplot(outlier.shape = NA, alpha = 0.7) + 
   geom_jitter(width=0.2, alpha = 0.5) + 
   theme_classic() + 
@@ -146,8 +129,7 @@ desulfo_wilcox_plot <- ggplot(desulfo_df, aes(x=conductivity_category, y=Rel_Abu
     subtitle = "Non-parametric Wilcoxon Rank-Sum Test") + 
   stat_compare_means(method = "wilcox.test", label = "p.signif", label.x = 1.5)
 
-desulfo_wilcox_plot
+geo_wilcox_plot
 
-ggsave("results/desulfobulbaceae_wilcox_plot.png", plot = desulfo_wilcox_plot, width = 7, height = 5, dpi = 300)
-
+ggsave("results/geobacter_wilcox_plot.png", plot = desulfo_wilcox_plot, width = 7, height = 5, dpi = 300)
 
