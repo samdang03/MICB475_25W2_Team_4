@@ -107,29 +107,43 @@ phylo_plot_3
 ggsave("results/taxonomy_geobacter_relative_plot.png", plot = phylo_plot_3, width = 10, height = 5, dpi = 300)
 
 #Conversion to relative abundance by sample for Wilcoxon box plot
-geo_df <- phylo_geo_relative %>%
-  psmelt()
+tax_df <- as.data.frame(as(tax_table(phylo_desulfo), "matrix"))
 
-geo_df <- mutate(geo_df, Abundance_num = as.numeric(Abundance))
+otu_ids <- rownames(otu_table(phylo_desulfo))
 
-geo_df <- geo_df %>%
-  group_by(Sample, conductivity_category) %>%
-  summarize(Rel_Abun = mean(Abundance_num))
+geo_asvs <- rownames(tax_df)[grepl("Geobacteraceae", tax_df$Family, ignore.case = TRUE)]
+geo_asvs <- intersect(geo_asvs, otu_ids)
+
+otu_mat <- as.matrix(otu_table(phylo_desulfo))
+if (!taxa_are_rows(phylo_desulfo)) {otu_mat <- t(otu_mat) }
+
+target_counts <- otu_mat[geo_asvs, , drop=FALSE]
+sample_totals <- colSums(otu_mat)
+target_totals <- colSums(target_counts)
+
+geo_stats <- data.frame(
+  SampleID = names(target_totals),
+  RelativeAbundance = target_totals / sample_totals)
+
+meta_df <- as.data.frame(as(sample_data(phylo_desulfo), "matrix"))
+meta_df$SampleID <- rownames(meta_df)
+desulfo_stats <- merge(desulfo_stats, meta_df, by = "SampleID")
+
 
 #Wilcoxon box plot
-geo_wilcox_plot <- ggplot(geo_df, aes(x=conductivity_category, y=Rel_Abun, fill=conductivity_category)) + 
-  geom_boxplot(outlier.shape = NA, alpha = 0.7) + 
-  geom_jitter(width=0.2, alpha = 0.5) + 
+
+desulfo_wilcox_plot <- ggplot(desulfo_stats, aes(x = conductivity_category, y = RelativeAbundance, fill = conductivity_category)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.7) +
   theme_classic() + 
   scale_fill_manual(values = c("high" = "blue", "low" = "red")) + 
-  labs(
-    title = "Abundance of Desulfobulbaceae Family by Conductivity Category",
-    x = "Conductivity Category",
-    y = "Relative Abundance", 
-    subtitle = "Non-parametric Wilcoxon Rank-Sum Test") + 
-  stat_compare_means(method = "wilcox.test", label = "p.signif", label.x = 1.5)
+  labs(title = "Abundance of Geobacteraceae Family by Conductivity Category",
+       subtitle = "Non-parametric Wilcoxon Rank-Sum Test",
+       x = "Conductivity Category", 
+       y = "Relative Abundance") + 
+  stat_compare_means(method = "wilcox.test", label = "p.signif", label.x = 1.5) 
 
-geo_wilcox_plot
+desulfo_wilcox_plot
 
 ggsave("results/geobacter_wilcox_plot.png", plot = desulfo_wilcox_plot, width = 7, height = 5, dpi = 300)
 
