@@ -129,6 +129,7 @@ meta_df <- as.data.frame(as(sample_data(phylo_desulfo), "matrix"))
 meta_df$SampleID <- rownames(meta_df)
 desulfo_stats <- merge(desulfo_stats, meta_df, by = "SampleID")
 
+colnames(desulfo_stats) <- make.unique(names(desulfo_stats))
 
 #Wilcoxon box plot
 
