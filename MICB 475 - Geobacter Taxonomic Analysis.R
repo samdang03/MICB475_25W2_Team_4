@@ -132,7 +132,7 @@ geo_wilcox_plot <- ggplot(geo_stats, aes(x = conductivity_category, y = Relative
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.2, alpha = 0.7) +
   theme_classic() + 
-  scale_fill_manual(values = c("high" = "blue", "low" = "red")) + 
+  scale_fill_manual(values = c("high" = "#0072B2", "low" = "#D62728")) + 
   labs(title = "Abundance of Geobacteraceae Family by Conductivity Category",
        subtitle = "Non-parametric Wilcoxon Rank-Sum Test",
        x = "Conductivity Category", 
