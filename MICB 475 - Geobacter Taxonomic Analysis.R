@@ -58,11 +58,6 @@ phylo_desulfo <- subset_taxa(phylo_nmnc, Phylum =="p__Thermodesulfobacteriota")
 unique_family <- get_taxa_unique(phylo_desulfo, "Family")
 unique_family
 
-#Thermodesulfobacteriaceae family only
-
-phylo_desulfo_f <- subset_taxa(phylo_nmnc, Family == "f__Thermodesulfobacteriaceae")
-get_taxa_unique(phylo_desulfo_f, "Genus")
-#There's only one genus (Thermosulfuriphilus), so this will not be continued with
 #The final plots will be focused entirely on families within the Thermodesulfobacteriota phylum
 
 #Filtering taxonomy table to top 10 + other
@@ -127,13 +122,13 @@ geo_stats <- data.frame(
 
 meta_df <- as.data.frame(as(sample_data(phylo_desulfo), "matrix"))
 meta_df$SampleID <- rownames(meta_df)
-desulfo_stats <- merge(desulfo_stats, meta_df, by = "SampleID")
+geo_stats <- merge(geo_stats, meta_df, by = "SampleID")
 
-colnames(desulfo_stats) <- make.unique(names(desulfo_stats))
+colnames(geo_stats) <- make.unique(names(geo_stats))
 
 #Wilcoxon box plot
 
-desulfo_wilcox_plot <- ggplot(desulfo_stats, aes(x = conductivity_category, y = RelativeAbundance, fill = conductivity_category)) +
+geo_wilcox_plot <- ggplot(geo_stats, aes(x = conductivity_category, y = RelativeAbundance, fill = conductivity_category)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.2, alpha = 0.7) +
   theme_classic() + 
@@ -144,7 +139,7 @@ desulfo_wilcox_plot <- ggplot(desulfo_stats, aes(x = conductivity_category, y = 
        y = "Relative Abundance") + 
   stat_compare_means(method = "wilcox.test", label = "p.signif", label.x = 1.5) 
 
-desulfo_wilcox_plot
+geo_wilcox_plot
 
-ggsave("results/geobacter_wilcox_plot.png", plot = desulfo_wilcox_plot, width = 7, height = 5, dpi = 300)
+ggsave("results/geobacter_wilcox_plot.png", plot = geo_wilcox_plot, width = 7, height = 5, dpi = 300)
 
