@@ -88,14 +88,20 @@ final_df <- dplyr::left_join(meta_rel, abund_df, by = "Sample")
 # Replace missing with 0
 final_df$Abundance[is.na(final_df$Abundance)] <- 0
 
-ggplot(final_df, aes(x =conductivity, y = Abundance)) +
+ggplot(final_df, aes(x = conductivity, y = Abundance)) +
   geom_point(alpha = 0.5, color = "steelblue") +
   geom_smooth(method = "lm", color = "red", se = TRUE) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
-  labs(x = "Conductivity (mS/cm)", y = "Relative Abundance of Geobacteraceae",
-    title = "Conductivity vs Geobacteraceae Relative Abundance") +
+  labs(x = "Conductivity (mS/cm)",
+       y = expression("Relative Abundance of " * italic("Geobacteraceae")),
+       title = expression("Conductivity vs " * italic("Geobacteraceae") * " Relative Abundance")) +
   theme_classic()
 
 
 ggsave("Continuous Conductivity vs Geobacteraceae.png",
        width = 8, height = 6, dpi = 300)
+
+result <- cor.test(final_df$conductivity, final_df$Abundance, 
+                   method = "spearman", 
+                   exact = FALSE)
+print(result)
