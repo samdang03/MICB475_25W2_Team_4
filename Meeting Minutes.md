@@ -230,3 +230,27 @@ Slide 7:
 - Chance to resubmit presentation if needed
 -Meet TUESDAY 3:30pm at LSI to finalize graph since team 5 is presenting OUR group on THURSDAY
 
+# April 7 Notes:
+
+## Feedback on wilcoxin plots:
+GOOD! We see higher abundance of geobactera in the LOW conductivity conditions 
+
+## Feedback for Slideshow:
+- Shift title to positive result focusing on GEOBACTER
+- Slide 3: Use the PHYLUM level of thermodesulfobulbacae 
+Geobacteriocea is linked to EET… 
+- ADD slide numbers
+- IMPORTANT: Have a slide BREAK explaining geobactera in more DETAIL 
+- AFTE the slide break.. Change the narrative where we POSTIVIELY look at this NEW family… and say instead like “geobacter” is an indicator taxa in LOW conductivity
+- Show the ISA results FIRST before the CORE MICROBIOME because it shows geobactera as part of the SAME PHYLUM 
+- Run a SPEARMAN’s test on the correlation plot on slide 12
+- There APPEARS to be a strong negative correlation
+- MORE meat in future directions… ie for possible fluctuations HOW are we going to fix this… are we going to look at different locations time points to see if there’s fluctuations
+- What ARE other cable bacteria that we DIDNT look at that may be present and be COMPETING with geobactera 
+- Doesnt have to be CABLE bacteria, but instead redox-capable in general 
+
+## Active CHANGES
+- REUPLOAD updated slides on CANVAS 
+- Just have the spearman’s test ready for the MANUSCRIPT, not necessary to have this on the presentation 
+
+
