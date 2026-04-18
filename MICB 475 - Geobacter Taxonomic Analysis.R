@@ -90,7 +90,7 @@ phylo_plot_3 <- plot_bar(phylo_geo_relative, fill = "Family") +
   facet_wrap(~conductivity_category, scales = "free_x") +
   theme_classic() +
   geom_bar(aes(fill = Family), stat = "identity", position = "stack", color = NA) +
-  labs(title = "Relative Abundance of Desulfobulbaceae Family in Thermodesulfobacteriaceae Phylum",
+  labs(title = "Relative Abundance of Geobacteraceae Family in Thermodesulfobacteriaceae Phylum",
        subtitle = "Grouped by Sediment Conductivity Category",
        x = "Individual Samples",
        y = "Relative Abundance (%)") +
@@ -125,6 +125,9 @@ meta_df$SampleID <- rownames(meta_df)
 geo_stats <- merge(geo_stats, meta_df, by = "SampleID")
 
 colnames(geo_stats) <- make.unique(names(geo_stats))
+
+#Spearman's test
+
 
 #Wilcoxon box plot
 
