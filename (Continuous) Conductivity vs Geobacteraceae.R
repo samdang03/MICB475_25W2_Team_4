@@ -47,7 +47,7 @@ phylo
 #Removing no conductivity data samples
 phylo_filtered <- subset_samples(phylo, !is.na(conductivity_category))
 
-#Removing chloroplasts and eukaryotes
+#Removing chloroplasts and mitochondrial ASVs
 phylo_nmnc <- subset_taxa(phylo_filtered, Domain == "d__Bacteria" & Family != "f__Chloroplast" & Family != "f__Mitochondria")
 
 phylo_notree <- phyloseq(
@@ -63,7 +63,7 @@ phy_rel <- transform_sample_counts(phylo_notree, function(x) x / sum(x))
 otu_rel <- as.data.frame(otu_table(phy_rel))
 tax_rel <- as.data.frame(tax_table(phy_rel))
 
-# Ensure correct orientation
+# Ensure correct orientation of new columns
 if(!taxa_are_rows(phy_rel))
   {otu_rel <- t(otu_rel)}
 
@@ -82,7 +82,7 @@ abund_df <- data.frame(
 meta_rel <- data.frame(sample_data(phylo_nmnc))
 meta_rel$Sample <- rownames(meta_rel)
 
-# Merge
+# Merge metadata and ASVs relative abundance
 final_df <- dplyr::left_join(meta_rel, abund_df, by = "Sample")
 
 # Replace missing with 0
