@@ -149,6 +149,9 @@ desulfo_stats <- merge(desulfo_stats, meta_df, by = "SampleID")
 
 #Wilcoxon box plot
 
+wilcox <- wilcox.test(RelativeAbundance ~ conductivity_category, data = desulfo_stats)
+wilcox
+
 desulfo_wilcox_plot <- ggplot(desulfo_stats, aes(x = conductivity_category, y = RelativeAbundance, fill = conductivity_category)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.2, alpha = 0.7) +
@@ -159,6 +162,7 @@ desulfo_wilcox_plot <- ggplot(desulfo_stats, aes(x = conductivity_category, y = 
        x = "Conductivity Category", 
        y = "Relative Abundance") + 
   stat_compare_means(method = "wilcox.test", label = "p.signif", label.x = 1.5) 
+
 
 desulfo_wilcox_plot
 

@@ -126,10 +126,11 @@ geo_stats <- merge(geo_stats, meta_df, by = "SampleID")
 
 colnames(geo_stats) <- make.unique(names(geo_stats))
 
-#Spearman's test
-
 
 #Wilcoxon box plot
+
+wilcox_geo <- wilcox.test(RelativeAbundance ~ conductivity_category, data = geo_stats)
+wilcox_geo
 
 geo_wilcox_plot <- ggplot(geo_stats, aes(x = conductivity_category, y = RelativeAbundance, fill = conductivity_category)) +
   geom_boxplot(outlier.shape = NA) +
